@@ -1,0 +1,31 @@
+-- DROP DATABASE
+DROP DATABASE IF EXISTS kanban_db;
+
+-- CREATE DATABASE
+CREATE DATABASE kanban_db;
+
+-- USE DATABASE
+\c kanban_db
+
+-- CREATE USERS TABLE
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CREATE TICKETS TABLE
+CREATE TABLE tickets (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    description TEXT,
+    assigned_user_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Indexes (Optional)
+CREATE INDEX idx_tickets_status ON tickets (status);
