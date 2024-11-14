@@ -7,10 +7,11 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/server.js",
-    "start:render": "npm run build && node dist/server.js && npm run seed",
+    "start:render": "npm run build && npm rebuild bcrypt && node dist/server.js && npm run seed",
     "dev": "npx nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node dist/seeds/index.js"
+    "seed": "node dist/seeds/index.js",
+    "rebuild-bcrypt": "npm rebuild bcrypt"
   },
   "nodemonConfig": {
     "watch": ["src"],
