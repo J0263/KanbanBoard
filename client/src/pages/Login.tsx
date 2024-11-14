@@ -1,5 +1,4 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-
 import Auth from '../utils/auth';
 import { login } from "../api/authAPI";
 
@@ -21,7 +20,11 @@ const Login = () => {
     e.preventDefault();
     try {
       const data = await login(loginData);
-      Auth.login(data.token);
+      if (data) { // Ensure data is not null
+        Auth.login(data.token); // TypeScript now recognizes `data.token`
+      } else {
+        console.error('Login failed: No token received');
+      }
     } catch (err) {
       console.error('Failed to login', err);
     }
@@ -31,14 +34,14 @@ const Login = () => {
     <div className='container'>
       <form className='form' onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <label >Username</label>
+        <label>Username</label>
         <input 
           type='text'
           name='username'
           value={loginData.username || ''}
           onChange={handleChange}
         />
-      <label>Password</label>
+        <label>Password</label>
         <input 
           type='password'
           name='password'
@@ -48,8 +51,7 @@ const Login = () => {
         <button type='submit'>Submit Form</button>
       </form>
     </div>
-    
-  )
+  );
 };
 
 export default Login;

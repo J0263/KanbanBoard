@@ -1,6 +1,10 @@
 import { UserLogin } from "../interfaces/UserLogin";
 
-const login = async (userInfo: UserLogin): Promise<string | null> => {
+interface LoginResponse {
+  token: string;
+}
+
+const login = async (userInfo: UserLogin): Promise<LoginResponse | null> => {
   try {
     const response = await fetch("/auth/login", {
       method: "POST",
@@ -10,11 +14,9 @@ const login = async (userInfo: UserLogin): Promise<string | null> => {
       body: JSON.stringify(userInfo),
     });
 
-    // Check if login was successful
     if (response.ok) {
-      const data = await response.json();
-      const token = data.token;
-      return token; // Return the JWT token
+      const data: LoginResponse = await response.json(); // Ensure data has type { token: string }
+      return data; // Return the object containing the token
     } else {
       console.error("Login failed:", response.statusText);
       return null;
