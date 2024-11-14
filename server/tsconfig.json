@@ -1,23 +1,16 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    /* Basic Options */
-    "target": "esnext" /* Specify ECMAScript target version. */,
-    "module": "commonjs" /* Specify module code generation. */,
-    
-    /* Modules */
-    "rootDir": "src" /* Specify the root folder within your source files. */,
-    "outDir": "dist" /* Specify an output folder for all emitted files. */,
-    
-    /* Type Checking */
-    "strict": true /* Enable all strict type-checking options. */,
-    "esModuleInterop": true /* Enable import/export interop between CommonJS and ES modules. */,
-    "skipLibCheck": true /* Skip type checking for all declaration files (.d.ts). */,
-    "resolveJsonModule": true /* Allows importing .json files. */,
-    
-    /* Node.js and Types */
-    "typeRoots": ["./node_modules/@types", "./src/types"] /* Specify type declaration locations. */,
-    "types": ["node"] /* Include Node.js types. */
+    "target": "esnext",
+    "module": "esnext", /* Use ES modules for bundling compatibility */
+    "rootDir": "src",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["node"]
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
